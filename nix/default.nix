@@ -1,7 +1,7 @@
 { stdenv }:
 
 stdenv.mkDerivation rec {
-  name = "{{ $basename }}";
+  name = "{{ $basename }}-${version}";
   version = "0.1";
 
   src = ./.;
