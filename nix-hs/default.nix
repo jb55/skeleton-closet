@@ -1,2 +1,6 @@
-{ nixpkgs ? import <nixpkgs> {}, compiler ? "{{ compiler ? ghc7101 }}" }:
-nixpkgs.pkgs.haskell.packages.${compiler}.callPackage ./{{ name ? $basename }}.nix { }
+{ nixpkgs ? import <nixpkgs> {}, compiler ? null }:
+let pkgs = nixpkgs.pkgs;
+    callPackage = if compiler != null
+                    then pkgs.haskell.packages.${compiler}.callPackage
+                    else pkgs.haskellPackages.callPackage;
+in callPackage ./{{ name ? $basename }}.nix { }
